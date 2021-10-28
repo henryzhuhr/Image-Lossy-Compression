@@ -1,0 +1,12 @@
+p>img{
+    display: block;
+    margin: 10px auto;
+}
+
+@media screen and (min-width: 1079px) {
+    .markdown-section p > img {
+    max-width: 33rem;
+    height: auto;
+    
+  }
+}

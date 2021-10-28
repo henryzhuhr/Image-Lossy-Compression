@@ -1,0 +1,221 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+
+<head>
+  <meta charset="UTF-8">
+  <title>DSP Homework</title>
+  <!-- 网页标题logo -->
+  <link rel="icon" href="images/icon.svg">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1" />
+  <meta name="description" content="Description">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, minimum-scale=1.0">
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify@4/lib/themes/vue.css">
+  <link rel="stylesheet" href="https://wugenqiang.js.org/src/css/iconfont.css">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/gh/wugenqiang/NoteBook@master/plugin/custom.css">
+  <link rel="stylesheet" href="https://unpkg.com/docsify-toc@1.0.0/dist/toc.css">
+  <!-- dark mode -->
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/docsify-dark-mode@latest/dist/style.min.css" />
+  <!-- gitalk -->
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/gitalk/dist/gitalk.css">
+  <!-- 支持 LaTex 语言 -->
+  <link rel="stylesheet" href="//cdn.jsdelivr.net/npm/katex@latest/dist/katex.min.css" />
+  <!-- Custom -->
+  <link rel="stylesheet" href="css/style.css">
+  <link rel="stylesheet" href="css/sidebar.css">
+  <link rel="stylesheet" href="css/scrollbar.css">
+  <link rel="stylesheet" href="css/code_block.css">
+  <link rel="stylesheet" href="css/katex.custom.css">
+  <link rel="stylesheet" href="css/images.css">
+</head>
+
+<body>
+  <div id="app">🏃‍🏃‍🏃‍💨</br>正在努力加载中...</div>
+  <script>
+    window.$docsify = {
+      name: 'DSP Homework',
+      logo: 'images/logo.svg', // 在侧边栏中出现的网站图标，你可以使用CSS来更改大小
+      repo: 'https://github.com/HenryZhuHR/DSP-Assignment',
+      loadNavbar: true,   // 顶部导航栏 _navbar.md
+      // loadSidebar: true,  // 侧边栏 _sidebar.md
+      subMaxLevel: 3,     // 显示侧边目录的等级
+      // coverpage: true,    // 封面
+      auto2top: true,     // 切换页面后是否自动跳转到页面顶部。
+      search: {           // 搜索栏
+        paths: 'auto',
+        placeholder: '🔍 搜索栏',
+        noData: '😒 搜索不到',
+        depth: 6,// Headline depth, 1 - 6
+        maxAge: 86400000, // 过期时间，单位毫秒，默认一天
+      },
+      // relativePath: true,
+      count: {    // 字数统计
+        countable: true,
+        fontsize: '0.9em',
+        color: 'rgb(188,188,188)',
+        language: 'chinese'
+      },
+      // footer: {   //添加页脚
+      //   copy: '\
+      //   <div class = "over" >\
+      //     不同，和而不同.\
+      //     </br></br>\
+      //     <a href="/" target="_blank">点击这里</a>可以首页回到查看其他内容</br>\
+      //     <span id="sitetime"></span><br/>\
+      //     <span>Copyright &copy; 2021 - 至今</span>\
+      //   </div>\
+      //   ',
+      //   auth: ' <a href="https://henryzhuhr.github.io/" target="_blank">🏷️ HenryZhu NoteBook</a>',
+      //   pre: '<hr/>',
+      //   style: 'text-align: center;',
+      // },
+      externalLinkTarget: '_blank', //外链打开方式：_blank表示在新标签页中打开
+      'flexible-alerts': {  // Flexible Alerts
+        note: {     // [!NOTE|label:注意]
+          label: "Note"
+        },
+        tip: {      // [!TIP]
+          label: "Tips"
+        },
+        warning: {  // [!WARNING]
+          label: "Warning"
+        },
+        attention: {// [!ATTENTION]
+          label: "Attention"
+        }
+      },
+      copyCode: {
+        buttonText: 'Click to Copy',
+        errorText: 'Error',
+        successText: 'Success'
+      }
+    }
+  </script>
+
+
+  <!-- Docsify v4 -->
+  <script src="//cdn.jsdelivr.net/npm/docsify@4"></script>
+
+
+  <!-- 图片缩放 - Zoom image -->
+  <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/zoom-image.min.js"></script>
+
+
+  <!-- 【复制到剪贴板】 在所有的代码块上添加一个简单的Click to copy按钮来允许用户从你的文档中轻易地复制代码。 -->
+  <script src="//cdn.jsdelivr.net/npm/docsify-copy-code/dist/docsify-copy-code.min.js"></script>
+
+
+
+
+  <!-- === dark mode === https://github.com/Plugin-contrib/docsify-plugin/tree/master/packages/docsify-dark-mode -->
+  <!-- <script src="//cdn.jsdelivr.net/npm/docsify-dark-mode@latest/dist/index.min.js"></script> -->
+
+  <!-- 数学公式  -->
+  <!-- CDN files for docsify-katex -->
+  <!-- <script src="//cdn.jsdelivr.net/npm/docsify-katex@latest/dist/docsify-katex.js"></script> -->
+  <script src="//cdn.jsdelivr.net/gh/upupming/docsify-katex@latest/dist/docsify-katex.js"></script>
+
+  
+  <!-- docsify plugin: Flexible Alerts: https://github.com/fzankl/docsify-plugin-flexible-alerts -->
+  <script src="https://unpkg.com/docsify-plugin-flexible-alerts"></script>
+
+
+  <!-- 代码高亮 -->
+  <script src="//unpkg.com/prismjs/components/prism-python.js"></script>
+
+  <!-- 搜索栏 -->
+  <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/search.min.js"></script>
+
+  <!-- 回到顶部功能 -->
+  <script src="https://cdn.jsdelivr.net/gh/wugenqiang/NoteBook@master/plugin/jquery.js"></script>
+  <script src="https://cdn.jsdelivr.net/gh/wugenqiang/NoteBook@master/plugin/jquery.goup.js"></script>
+  <script type="text/javascript">
+    $(document).ready(function () {
+      $.goup({
+        trigger: 100,
+        bottomOffset: 52,
+        locationOffset: 25,
+        title: '回到顶部',
+        titleAsText: true
+      });
+    });
+  </script>
+
+  <!-- 复制提醒 -->
+  <!-- <script src="https://cdn.jsdelivr.net/gh/wugenqiang/NoteBook@master/plugin/sweetalert.min.js"></script>
+  <script>
+    document.body.oncopy = function () {
+      swal("📝复制成功📝",
+        "转载或引用请保留原文链接，注明来源。</br>",
+        "- by Henry Zhu",
+        "success");
+    };
+  </script> -->
+
+  <!-- 添加页脚 -->
+  <script src="https://cdn.jsdelivr.net/gh/wugenqiang/NoteBook@master/plugin/docsify-footer-enh.min.js"></script>
+
+  <!-- 添加网站运行时间统计 -->
+  <script src="js/count_run_time.js"></script>
+
+  <!-- 实现离线化 -->
+  <script>
+    if (typeof navigator.serviceWorker !== 'undefined') {
+      navigator.serviceWorker.register('pwa.js')
+    }
+  </script>
+
+  <!-- 访问量统计 -->
+  <script async src="https://cdn.jsdelivr.net/gh/wugenqiang/NoteBook@master/plugin/js/busuanzi.pure.mini.js"></script>
+
+  <!-- 字数统计 -->
+  <script src="//unpkg.com/docsify-count/dist/countable.js"></script>
+
+
+  <script src="https://eqcn.ajz.miesnfu.com/wp-content/plugins/wp-3d-pony/live2dw/lib/L2Dwidget.min.js"></script>
+  <script>
+    L2Dwidget.init({
+      "model": {
+        // 模型
+        jsonPath: "https://unpkg.com/live2d-widget-model-wanko@1.0.5/assets/wanko.model.json",
+        "scale": 1
+      },
+      "display": {
+        "position": "right", //看板娘的表现位置
+        "width": 70,  //小萝莉的宽度
+        "height": 140, //小萝莉的高度
+        "hOffset": 0,
+        "vOffset": 33
+      },
+      "mobile": {
+        "show": true,
+        "scale": 0.5
+      },
+      "react": {
+        "opacityDefault": 0.7,
+        "opacityOnHover": 0.2
+      }
+    });
+  </script>
+
+  <!-- 支持评论系统 Gitalk -->
+  <!-- <div id="gitalk-container" style="width: 10px;"></div>
+  <script src="//cdn.jsdelivr.net/npm/docsify/lib/plugins/gitalk.min.js"></script>
+  <script src="//cdn.jsdelivr.net/npm/gitalk/dist/gitalk.min.js"></script>
+  <script>
+    const gitalk = new Gitalk({
+      clientID: 'd711249af4cbab45cd25',
+      clientSecret: 'f17e65556dea95eb4eb1727653d33c718ef37ed4',
+      repo: 'gitalk-comments',
+      owner: 'HenryZhuHR',
+      admin: ['HenryZhuHR'],
+      // facebook-like distraction free mode
+      distractionFreeMode: false,// 无干扰模式
+      id: location.pathname, // 返回当前 URL 的路径部分作为id
+    language:'zh-CN', // 语言
+    })
+    gitalk.render('gitalk-container')
+  </script> -->
+
+</body>
+
+</html>
