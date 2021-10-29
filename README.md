@@ -5,17 +5,19 @@
   - [1、图像分割](#1图像分割)
   - [2、颜色空间转换](#2颜色空间转换)
   - [DCT变换](#dct变换)
+  - [量化](#量化)
 - [代码](#代码)
 - [结果](#结果)
   - [评价指标](#评价指标)
 - [参考资料](#参考资料)
 
 # 文献
-
+常见的图像压缩算法
+![常见的图像压缩算法](https://img-blog.csdn.net/20151112120615499?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center)
 
 # JPEG图像压缩算法
 ## 1、图像分割
-将图像分为若干 $8 \times 8$ 大小的子块
+将图像分为若干 $8 \times 8 \neq 0$ 大小的子块
 ## 2、颜色空间转换
 需要将 RGB 颜色空间转化为 YCbCr 颜色空间，其中，Y是亮度(Luminance)，Cb 和 Cr 是绿色和红色的“色差值”
 
@@ -61,6 +63,10 @@ $$\begin{aligned}
 $$\begin{aligned}
     F_m=\sum_{k=0}^{n-1} x_k \cos[\frac{\pi}{n}m(k+\frac{1}{2})],\quad m=0,1,...,n-1
 \end{aligned}$$
+
+## 量化
+量化的目的是为了丢弃不显著信息分块
+
 
 # 代码
 
