@@ -13,7 +13,7 @@
 
 # 文献
 常见的图像压缩算法
-![常见的图像压缩算法](https://img-blog.csdn.net/20151112120615499?watermark/2/text/aHR0cDovL2Jsb2cuY3Nkbi5uZXQv/font/5a6L5L2T/fontsize/400/fill/I0JBQkFCMA==/dissolve/70/gravity/Center)
+![常见的图像压缩算法](./images/20151112120615499.gif)
 
 # JPEG图像压缩算法
 ## 1、图像分割
@@ -79,4 +79,3 @@ $$\begin{aligned}
 - [Difference between Lossy and Lossless Compression](https://www.thecrazyprogrammer.com/2019/12/lossy-and-lossless-compression.html)
 - [JPEG算法解密](https://thecodeway.com/blog/?tag=%e5%8e%8b%e7%bc%a9)
 - [数字图像处理（八）图像压缩-有损压缩/压缩算法+matlab](https://blog.csdn.net/packdge_black/article/details/107230600)
-- [几种图像压缩的算法比较](http://www.360doc.com/content/14/0318/11/1457948_361528980.shtml)
