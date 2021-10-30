@@ -34,8 +34,8 @@ $$\begin{aligned}
 蓝色和红色的色差为
 $$\begin{aligned}
     Y   &= 0.299   \cdot R + 0.587    \cdot G + 0.114 \cdot B \\
-    C_b &= -0.1687 \cdot R - 0.3313   \cdot G + 0.5 \cdot B \\
-    C_r &= 0.299   \cdot R - 0.4187   \cdot G - 0.0813 \cdot B \\
+    C_b &= -0.1687 \cdot R - 0.3313   \cdot G + 0.5 \cdot B +128\\
+    C_r &= 0.5   \cdot R - 0.4187   \cdot G - 0.0813 \cdot B +128\\
 \end{aligned}$$
 
 ## DCT变换
