@@ -1,7 +1,8 @@
 # 图像有损压缩(Image Lossy Compression)
 - [图像有损压缩(Image Lossy Compression)](#图像有损压缩image-lossy-compression)
 - [文献](#文献)
-- [JPEG图像压缩算法](#jpeg图像压缩算法)
+  - [JEPG(Joint Photographic Experts Group)](#jepgjoint-photographic-experts-group)
+- [JPEG图像压缩算法原理](#jpeg图像压缩算法原理)
   - [1、图像分割](#1图像分割)
   - [2、颜色空间转换](#2颜色空间转换)
   - [DCT变换](#dct变换)
@@ -14,8 +15,15 @@
 # 文献
 常见的图像压缩算法
 ![常见的图像压缩算法](./images/20151112120615499.gif)
+- 行程长度压缩RLE
+- 霍夫曼编码
+- LZW算法
+- 算术压缩方法
+- [JEPG(Joint Photographic Experts Group)](#jepgjoint-photographic-experts-group)
+## JEPG(Joint Photographic Experts Group)
 
-# JPEG图像压缩算法
+
+# JPEG图像压缩算法原理
 ## 1、图像分割
 将图像分为若干 $8 \times 8 \neq 0$ 大小的子块
 ## 2、颜色空间转换
@@ -62,6 +70,27 @@ $$\begin{aligned}
 其中，变换系数 $F_m$ 为
 $$\begin{aligned}
     F_m=\sum_{k=0}^{n-1} x_k \cos[\frac{\pi}{n}m(k+\frac{1}{2})],\quad m=0,1,...,n-1
+\end{aligned}$$
+
+
+一般的二维DCT变换
+$$\begin{aligned}
+    F(u,v) &=c(u)c(v) \sum_{i=0}^{M-1} \sum_{j=0}^{N-1} f(i,j) \cos(\frac{i+0.5}{M}u\pi) \cos(\frac{j+0.5}{N}u\pi) \\
+    c(u) &=\left\{\begin{aligned}
+        & \sqrt{\frac{1}{N}}, & \quad u=0 \\
+        & \sqrt{\frac{2}{N}}, & \quad u\neq 0
+    \end{aligned}\right.
+    \quad u,v=0,1,2,...,7
+\end{aligned}$$
+
+当原始图像从 RGB 颜色空间转换到 YCbCr 颜色空间之后，需要对每一个 $8 \times 8$ 的图像块进行二维DCT变换
+$$\begin{aligned}
+    F(u,v) &=c(u)c(v) \sum_{i=0}^{7} \sum_{j=0}^{7} f(i,j) \cos(\frac{i+0.5}{8}u\pi) \cos(\frac{j+0.5}{8}u\pi) \\
+    c(u) &=\left\{\begin{aligned}
+        & \sqrt{\frac{1}{8}},   & \quad u=0 \\
+        & \frac{1}{2},          & \quad u\neq 0
+    \end{aligned}\right.
+    \quad u,v=0,1,2,...,7
 \end{aligned}$$
 
 ## 量化
