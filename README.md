@@ -9,8 +9,9 @@
     - [DCT 离散余弦变换](#dct-离散余弦变换)
     - [JPEG中的DCT](#jpeg中的dct)
   - [量化](#量化)
-  - [DC和AC分量编码](#dc和ac分量编码)
   - [熵编码](#熵编码)
+    - [zigzag 扫描](#zigzag-扫描)
+    - [Huffman 编码](#huffman-编码)
 - [结果](#结果)
   - [评价指标](#评价指标)
 - [参考资料](#参考资料)
@@ -72,34 +73,10 @@ $$\begin{aligned}
 
 ## 色度采样
 
+444 422 420
+
 ## 2. DCT变换
 ### DCT 离散余弦变换
-
-将一系列离散的一维数据 $[x_0,x_1,...,x_n]$ 分解为一系列
-$$\begin{aligned}
-    \begin{bmatrix}
-        x_0 \\ x_1 \\ x_2 \\ ... \\ x_{n-1}
-    \end{bmatrix}
-    = \frac{F_0}{n}
-    \begin{bmatrix}
-        1 \\ 1 \\ 1 \\ ... \\ 1
-    \end{bmatrix}
-    +
-    \sum_{k=1}^{n-1} \frac{2F_k}{n}
-    \begin{bmatrix}
-        \cos\frac{k}{2n}\pi \\
-        \cos\frac{2k}{2n}\pi \\
-        \cos\frac{3k}{2n}\pi \\
-        ... \\
-        \cos\frac{(2n-1)k}{2n}\pi
-    \end{bmatrix}
-\end{aligned}$$
-
-其中，变换系数 $F_m$ 为
-$$\begin{aligned}
-    F_m=\sum_{k=0}^{n-1} x_k \cos[\frac{\pi}{n}m(k+\frac{1}{2})],\quad m=0,1,...,n-1
-\end{aligned}$$
-
 
 一般的二维DCT变换
 $$\begin{aligned}
@@ -156,12 +133,17 @@ T =
     0.0975   -0.2778    0.4157   -0.4904    0.4904   -0.4157    0.2778   -0.0975
 ```
 
+对图像进行 $8\times 8$ 分块后，对每一个矩阵块 A 都进行 DCT 变换 $TAT^T$ 
+
 ## 量化
-量化的目的是为了丢弃不显著信息分块
+量化的目的是为了丢弃不显著信息分块，也就是图像中的高频区域
+
+量化表是控制 JPEG 压缩比的关键，可以根据输出图片的质量来自定义量化表，通常自定义量化表与标准量化表呈比例关系，表中数字越大则质量越低，压缩率越高。PhotoShop 有12张量化表。
 
 
+下面是两张 50% 的图像质量的量化表
 
-标准亮度分量量化表
+标准亮度分量量化表 $Q_Y$
 ```c
 static const unsigned int std_luminance_quant_tbl[DCTSIZE2] = {
     16,  11,  10,  16,  24,  40,  51,  61,
@@ -175,7 +157,7 @@ static const unsigned int std_luminance_quant_tbl[DCTSIZE2] = {
 };
 ```
 
-标准色度分量量化表
+标准色度分量量化表 $Q_C$
 ```c
 static const unsigned int std_chrominance_quant_tbl[DCTSIZE2] = {
     17,  18,  24,  47,  99,  99,  99,  99,
@@ -190,15 +172,22 @@ static const unsigned int std_chrominance_quant_tbl[DCTSIZE2] = {
 ```
 量化表搞掉了很多高频量，对DCT变换进行量化后得到量化结果，会出现大量的0，使用Z形扫描，可以将大量的0连到一起，减小编码后的大小。越偏离左上方，表示频率越高，这里其实是通过量化，将图像的高频信息干掉了。
 
-## DC和AC分量编码
-DC进行DPCM编码，AC进行RLC编码，这两种编码都有中间格式，进一步减小存储量，原理可自行wiki
+<!-- ## DC和AC分量编码
+DC进行DPCM编码，AC进行RLC编码，这两种编码都有中间格式，进一步减小存储量，原理可自行wiki -->
+<!-- 使用差分脉冲编码调制(DPCM)对直流系数(DC)进行编码。 -->
+<!-- 使用行程长度编码(RLE)对交流系数(AC)进行编码。 -->
 
 ## 熵编码
-在得到DC系数的中间格式和AC系数的中间格式之后，为进一步压缩图像数据，有必要对两者进行熵编码，通过对出现概率较高的字符采用较小的bit数编码达到压缩的目的。JPEG标准具体规定了两种熵编码方式：Huffman编码和算术编码。JPEG基本系统规定采用Huffman编码。
+熵编码的过程分为 zigzag 扫描和 Huffman 编码
+
+### zigzag 扫描
+
+### Huffman 编码
+<!-- 在得到DC系数的中间格式和AC系数的中间格式之后，为进一步压缩图像数据，有必要对两者进行熵编码，通过对出现概率较高的字符采用较小的bit数编码达到压缩的目的。JPEG标准具体规定了两种熵编码方式：Huffman编码和算术编码。JPEG基本系统规定采用Huffman编码。
 
 Huffman编码：对出现概率大的字符分配字符长度较短的二进制编码，对出现概率小的字符分配字符长度较长的二进制编码，从而使得字符的平均编码长度最短。Huffman编码的原理请参考数据结构中的Huffman树或者最优二叉树。
 
-Huffman编码时DC系数与AC系数分别采用不同的Huffman编码表，对于亮度和色度也采用不同的Huffman编码表。因此，需要4张Huffman编码表才能完成熵编码的工作。具体的Huffman编码采用查表的方式来高效地完成。然而，在JPEG标准中没有定义缺省的Huffman表，用户可以根据实际应用自由选择，也可以使用JPEG标准推荐的Huffman表。或者预先定义一个通用的Huffman表，也可以针对一副特定的图像，在压缩编码前通过搜集其统计特征来计算Huffman表的值。
+Huffman编码时DC系数与AC系数分别采用不同的Huffman编码表，对于亮度和色度也采用不同的Huffman编码表。因此，需要4张Huffman编码表才能完成熵编码的工作。具体的Huffman编码采用查表的方式来高效地完成。然而，在JPEG标准中没有定义缺省的Huffman表，用户可以根据实际应用自由选择，也可以使用JPEG标准推荐的Huffman表。或者预先定义一个通用的Huffman表，也可以针对一副特定的图像，在压缩编码前通过搜集其统计特征来计算Huffman表的值。 -->
 
 # 结果
 ## 评价指标

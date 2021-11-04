@@ -1,31 +1,31 @@
 clc;clear;
 quality_scale = 0.5; % 0-1之间的值，用来指定压缩的质量 
 
-im=imread('lena512color.tiff');
-figure; imshow( im);
+image=imread('lena512color.tiff');
+figure; imshow( image);
 title('原图'); % 显示原图
-[h,w,~] = size(im);
+[h,w,~] = size(image);
 
 %% 像素值转为yuv
 % YCbCr是一种经过矫正，特殊的YUV，这里使用的是BT.601-4标准
-im_yuv = func_rgb2yuv(im);
+image_yuv = func_rgb2yuv(image);
 
 %% 对色度图像二次采样
 % YUV有三种采集方式
 % 4:4:4采样：每一个Y对应一个U和一个V。大小为3*width*height（width和height是一帧的大小）。
 % 4:2:2采样：每两个Y共用一对U和V。大小为2*width*height（其中U分量和V分量各占1/2个帧大小）。
 % 4:2:0采样：每四个Y共用一对U和V。大小为3/2*width*height（其中U分量和V分量各站1/4个帧大小）
-im_yuv = func_subsampling_420( im_yuv);
+image_yuv = func_subsampling_420( image_yuv);
 % figure; imshow( func_yuv2rgb( im_yuv));
 % title('二次采样'); % 显示二次采样图
 
 %% 对图像分块8*8并DCT变换
-im_dct = func_dct(im_yuv);
+im_dct = func_dct(image_yuv);
 
 %% 量化 丢弃不显著信息分块
 % 使用JPEG2000推荐的标准亮度量化表和标准色差量化表
-quantified =  func_quantization(im_dct,quality_scale);
-figure; imshow( uint8( im_dct(:,:,1))); title('分块DCT结果');
+quantified =  func_quantization(image_dct,quality_scale);
+figure; imshow( uint8( image_dct(:,:,1))); title('分块DCT结果');
 figure; imshow( uint8(quantified(:,:,1))); title('量化结果');
 
 %% zigzag
@@ -62,10 +62,10 @@ end
 iquantified = func_iquantization(inverse_zigzag, quality_scale);
 
 %% IDCT
-im_idct = func_idct(iquantified);
+image_idct = func_idct(iquantified);
 
 %% yuv->rgb
-rgb = uint8(func_yuv2rgb( im_idct));
+rgb = uint8(func_yuv2rgb( image_idct));
 figure; imshow(rgb);
 title('恢复结果'); 
 imwrite(rgb,'lena.jpg','jpg');
