@@ -1,4 +1,8 @@
 function  out = func_quantization(im_dct,quality_scale)
+    % 使用JPEG2000推荐的标准亮度量化表和标准色差量化表进行量化
+    % 这里的quality_scale作为一个权重，用来控制量化表中的参数，输入范围是0到1
+    % 标准量化表中的数值越大->round(DCT结果/量化值)得到的值越小->更多的值接近0从而被舍弃->压缩比越大
+    % 实际量化表=标准量化表*(1-quality_scale+0.5) 就可以控制实际用的量化表等于标准量化表的0.5到1.5倍
     Luminance_Quantization_Table = [
     16,  11,  10,  16,  24,  40,  51,  61;
 	12,  12,  14,  19,  26,  58,  60,  55;
