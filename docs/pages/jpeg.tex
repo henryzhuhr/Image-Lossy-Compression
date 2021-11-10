@@ -4,6 +4,9 @@
 
 需要将 RGB 颜色空间转化为 YUV 颜色空间，也叫 YCbCr，其中，Y 是亮度 (Luminance)，U 和 V 表示色度 (Chrominance) 和浓度 (Chroma)，UV 分量同时表示色差
 
+做这一步的原因是对于人眼来说，图像中明暗的变化更容易被感知到，而对颜色的变化则没有那么敏感，将两者分开，就可以根据数据的重要程度的做不同的处理
+
+
 研究表明，红绿蓝三基色所贡献的亮度不同，绿色所贡献亮度最多，蓝色所贡献亮度最少。假定红色贡献为 $K_R$，蓝色贡献为 $K_B$，则亮度可以表示为
 \begin{equation}
     Y = K_R \cdot R + (1-K_R-K_B) \cdot G + K_B \cdot B
@@ -42,6 +45,22 @@
 
 
 \subsection{色度采样}
+为了进一步压缩图像数据，JPEG对色度图像二次采样。YUV有三种采样方式：
+
+4:4:4采样：每一个Y对应一个U和一个V。
+
+4:2:2采样：每两个Y共用一对U和V。
+
+4:2:0采样：每四个Y共用一对U和V。
+
+\begin{figure}
+    \centering
+    \includegraphics[width=1.0\textwidth]{pages/jpeg/chrominance_sample.png}
+    \caption{3种色度采样示意}
+    \label{Fig.chrominance_sample}
+\end{figure}
+
+
 \section{图像分块与DCT变换}
 \subsection{图像分块}
 \subsection{DCT变换}
@@ -111,3 +130,13 @@ T =
 
 \section{量化}
 \section{熵编码}
+\subsection{霍夫曼编码}
+霍夫曼编码是一种用于无损数据压缩的熵编码（权编码）算法，其使用变长编码表对数据进行编码。
+
+变长编码表是通过评估符号出现概率得到的，出现概率高的符合使用较短的编码，反之出现概率低的则使用较长的编码，使编码之后的字符串的平均长度降低，从而达到无损压缩数据的目的。
+
+霍夫曼编码主要分为两步：
+
+根据每个字符出现的概率构建一颗最优二叉树；
+
+再根据二叉树对字符进行编码。
