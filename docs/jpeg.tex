@@ -50,19 +50,19 @@
     basicstyle        =   \ttfamily\footnotesize,
     keywordstyle      =   \color{codepurple}\bfseries,% 关键字颜色
     identifierstyle   =   \color{blue},
-    commentstyle      =   \color{codegreen}% 注释颜色
     % showstringspaces  =   false, % 不显示字符串内的空格
-    breaklines        =   true,   % 自动换行，建议不要写太长的行
     backgroundcolor   =   \color[rgb]{0.98,0.98,0.98},% 背景颜色
     numbers           =   left, % 显示行号 left right none
     xleftmargin       =   3em, %整体距左侧边线的距离为2em
     xrightmargin      =   1em,
     % 中文代码
-    breaklines        = true,
-    breakatwhitespace = true,
-    escapeinside      = ``,%逃逸字符(1左面的键)，用于显示中文例如在代码中`中文...`
-    tabsize           = 4,
-    extendedchars     = false %解决代码跨页时，章节标题，页眉等汉字不显示的问题  
+    commentstyle      =   \ttfamily\color{codegreen},                % 设置代码注释的格式
+    breaklines,% 自动换行，建议不要写太长的行
+    showstringspaces  =   false,
+    breakatwhitespace =   true,
+    % escapeinside      = ``,%逃逸字符(1左面的键)，用于显示中文例如在代码中`中文...`
+    tabsize           = 2,
+    extendedchars     = false %解决代码跨页时，章节标题，页眉等汉字不显示的问题
 }
 
 
