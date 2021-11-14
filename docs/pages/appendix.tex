@@ -1,11 +1,31 @@
-\chapter{Matlab 代码}
-\section{DCT 分解}
+\chapter{Matlab 实验代码}
 
+颜色空间转换（RGB转换到YUV）
 \lstinputlisting[language=matlab]{../src/func_dct.m}
 
-\lstinputlisting[language=matlab]{../src/func_idct.m}
+4:2:0色度采样
+\lstinputlisting[language=matlab]{../src/func_subsampling_420.m}
 
+DCT变换代码
+\lstinputlisting[language=matlab]{../src/func_dct.m}
+
+量化代码
 \lstinputlisting[language=matlab]{../src/func_quantization.m}
 
+量化代码
+\lstinputlisting[language=matlab]{../src/func_quantization.m}
+
+行程码编码
+\lstinputlisting[language=matlab]{../src/rlc_enc.m}
+
+行程码解码
+\lstinputlisting[language=matlab]{../src/rlc_dec.m}
+
+反量化代码
 \lstinputlisting[language=matlab]{../src/func_iquantization.m}
 
+IDCT变换代码
+\lstinputlisting[language=matlab]{../src/func_idct.m}
+
+颜色空间恢复（YUV转换到RGB）
+\lstinputlisting[language=matlab]{../src/func_dct.m}
