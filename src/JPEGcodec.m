@@ -1,14 +1,17 @@
-clc;clear;
+clc;clear all;
 
 quality_scale = 0.5; % 0-1之间的值，用来指定压缩的质量 
+% im=imread('mavic3.tiff');
 im=imread('lena512color.tiff');
-figure; imshow( im);
-title('原图'); % 显示原图
+imwrite(uint8( im),'../docs/pages/jpeg/origin.jpg');
 [h,w,~] = size(im);
 
 %% 像素值转为yuv
 % YCbCr是一种经过矫正，特殊的YUV，这里使用的是BT.601-4标准
 im_yuv = func_rgb2yuv(im);
+imwrite(uint8( im_yuv(:,:,1)),'../docs/pages/jpeg/yuv-y.jpg');
+imwrite(uint8( im_yuv(:,:,2)),'../docs/pages/jpeg/yuv-u.jpg');
+imwrite(uint8( im_yuv(:,:,3)),'../docs/pages/jpeg/yuv-v.jpg');
 
 %% 对色度图像二次采样
 % YUV有三种采集方式
@@ -16,6 +19,9 @@ im_yuv = func_rgb2yuv(im);
 % 4:2:2采样：每两个Y共用一对U和V。大小为2*width*height（其中U分量和V分量各占1/2个帧大小）。
 % 4:2:0采样：每四个Y共用一对U和V。大小为3/2*width*height（其中U分量和V分量各占1/4个帧大小）
 im_yuv = func_subsampling_420( im_yuv);
+imwrite(uint8( im_yuv(:,:,1)),'../docs/pages/jpeg/yuv420-y.jpg');
+imwrite(uint8( im_yuv(:,:,2)),'../docs/pages/jpeg/yuv420-u.jpg');
+imwrite(uint8( im_yuv(:,:,3)),'../docs/pages/jpeg/yuv420-v.jpg');
 
 %% 对图像分块8*8并DCT变换
 im_dct = func_dct(im_yuv);
@@ -23,8 +29,10 @@ im_dct = func_dct(im_yuv);
 %% 量化 丢弃不显著信息分块
 % 使用JPEG2000推荐的标准亮度量化表和标准色差量化表
 quantified =  func_quantization(im_dct,quality_scale);
-figure; imshow( uint8( im_dct(:,:,1))); title('分块DCT结果');
-figure; imshow( uint8(quantified(:,:,1))); title('量化结果');
+% figure; imshow( uint8( im_dct(:,:,1))); title('分块DCT结果');
+imwrite(uint8( im_dct(:,:,1)),'../docs/pages/jpeg/block.jpg');
+% figure; imshow( uint8(quantified(:,:,1))); title('量化结果');
+imwrite(uint8( quantified(:,:,1)),'../docs/pages/jpeg/block-quantify.jpg');
 
 %% zigzag
 % 对每个8*8块进行z形编码，形成一个64*1的向量
@@ -67,7 +75,7 @@ col_vec_cr = col_vec_cr(:);
 
 uint8_count=size(rlc_count_y,2)+size(rlc_count_cb,2)+size(rlc_count_cr,2) * 2;
 bitcost_rlc = uint8_count*8;
-ratio_rlc = h*w*3*8 / bitcost_rlc
+ratio_rlc = h*w*3*8 / bitcost_rlc;
 
 %% huffman
 % 对游程编码的6个分量分别做哈夫曼编码

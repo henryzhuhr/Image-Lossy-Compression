@@ -1,0 +1,80 @@
+%% An Introduction to LaTeX Thesis Template of Wuhan University
+%%
+%% Created by WHUTUG
+
+
+
+\documentclass[type=master,oneside]{whu-custom}
+\whusetup
+{
+  info               =
+    {
+      title          = {图像有损压缩Matlab仿真及性能测试},
+      student-number = {2021202120085},
+      school         = {电子信息学院},
+      author         = {陈子昂,朱鹤然,卢意帆},
+      author*        = {Chen Ziang, Zhu Heran, Lu Yifan},
+      subject        = {学科},
+      major          = {电子信息学院},
+      advisor        = {茹国宝},
+      direction      = {信息与通信工程},
+      % date           = {2021/5},
+      keywords       = {关键词 1 , 关键词 2 , 关键词 3 , 关键词 4 , 一个非常非常，非常非常长——的关键词 5},
+      keywords*      = {key word 1 , key word 2 , key word 3 , key word 4 , {and a very very, very very long key word---the key word 5}},
+    },
+  style              =
+    {
+      graphics-path  = {{figures/}{data/}},
+    },
+  element            =
+    {
+      abstract       = {pages/abstract},
+      bibliography   = {ref/refs},
+      appendix       = {pages/appendix}
+    }
+}
+% 
+\usepackage{ctex}
+\usepackage{listings}  % 排代码用的宏包
+\usepackage{color}
+\definecolor{codegreen}{rgb}{0,0.6,0}
+\definecolor{codegray}{rgb}{0.5,0.5,0.5}
+\definecolor{codepurple}{rgb}{0.58,0,0.82}
+\definecolor{backcolour}{rgb}{0.95,0.95,0.92}
+\usepackage{fontspec}
+\setmonofont{Consolas}
+\lstset{
+    basicstyle        =   \ttfamily\footnotesize,
+    keywordstyle      =   \color{codepurple}\bfseries,% 关键字颜色
+    identifierstyle   =   \color{blue},
+    % showstringspaces  =   false, % 不显示字符串内的空格
+    backgroundcolor   =   \color[rgb]{0.98,0.98,0.98},% 背景颜色
+    numbers           =   left, % 显示行号 left right none
+    xleftmargin       =   3em, %整体距左侧边线的距离为2em
+    xrightmargin      =   1em,
+    % 中文代码
+    commentstyle      =   \ttfamily\color{codegreen},                % 设置代码注释的格式
+    breaklines,% 自动换行，建议不要写太长的行
+    showstringspaces  =   false,
+    breakatwhitespace =   true,
+    % escapeinside      = ``,%逃逸字符(1左面的键)，用于显示中文例如在代码中`中文...`
+    tabsize           = 2,
+    extendedchars     = false %解决代码跨页时，章节标题，页眉等汉字不显示的问题
+}
+
+\usepackage{hyperref}
+\hypersetup{
+	colorlinks=true,
+	linkcolor=cyan,
+	filecolor=blue,      
+	urlcolor=red,
+	citecolor=green,
+}
+
+
+\begin{document}
+%%----------- 主体部分 ----------- %%
+\include{pages/background}
+\include{pages/jpeg}
+\include{pages/evaluation}
+\end{document}
