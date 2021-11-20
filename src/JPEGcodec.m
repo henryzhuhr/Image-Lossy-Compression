@@ -1,7 +1,6 @@
 clc;clear all;
 
 quality_scale = 0.5; % 0-1之间的值，用来指定压缩的质量 
-% im=imread('mavic3.tiff');
 im=imread('lena512color.tiff');
 imwrite(uint8( im),'../docs/pages/jpeg/origin.jpg');
 [h,w,~] = size(im);
